@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <div class="fridge-container">
-      <FridgeLevel v-for="category in categories" v-bind:key="category.id" v-bind:categories-title="category"/>
-    </div>
     <div class="search">
       <form class="search__form">
         <input class="search__input" type="text" v-model="searchItem"  placeholder="Search product 🔍︎ 😋">
@@ -15,31 +12,8 @@
     </div>
     <div class="frige-wrapper">
       <div class="frige-container">
-        <div class="fridge-level"> 
-          <h2 class="fridge-level__title">Salumi</h2>
-          <div v-for="item in matchItems(salumi)" v-bind:key="item.id">{{ item.product}}</div>
-          <div class="fridge-level__line"></div>
-        </div>
-        <div class="fridge-level"> 
-          <h2 class="fridge-level__title">Formaggi</h2>
-          <div v-for="item in matchItems(formaggi)" v-bind:key="item.id">{{ item.product}}</div>
-          <div class="fridge-level__line"></div>
-        </div>
-        <div class="fridge-level"> 
-          <h2 class="fridge-level__title">Verdure</h2>
-          <div v-for="item in matchItems(verdure)" v-bind:key="item.id">{{ item.product}}</div>
-          <div class="fridge-level__line"></div>
-        </div>
-        <div class="fridge-level"> 
-          <h2 class="fridge-level__title">Bibite</h2>
-          <div v-for="item in matchItems(bibite)" v-bind:key="item.id">{{ item.product}}</div>
-          <div class="fridge-level__line"></div>
-        </div>
-        <div class="fridge-level"> 
-          <h2 class="fridge-level__title">Altro</h2>
-          <div v-for="item in matchItems(altro)" v-bind:key="item.id">{{ item.product}}</div>
-          <div class="fridge-level__line"></div>
-        </div>
+        <FridgeLevel v-for="category in categories" v-bind:key="category" v-bind:categories-title="category"
+        v-bind:items="categoryItems(category)"></FridgeLevel>
       </div>
     </div>
   </div>
@@ -161,6 +135,9 @@ export default {
       arr.push(found)
       arr.sort((item1, item2)  => item1.expiration - item2.expiration)
     },
+    categoryItems(categoryName) {
+      return this.matchItems(this[categoryName]);
+    },
     matchItems(items) {
       if(this.searchItem === '') {
         return items
@@ -252,55 +229,6 @@ export default {
       margin-top: 30px;
       justify-content: space-between;
     }
-  }
-
-  .fridge-level {
-    position: relative;
-    margin-right: 10px;
-    min-height: 200px;
-    height: auto;
-    background: aquamarine;
-    padding: 0 10px;
-  }
-
-  @media screen and (min-width: 992px) {
-    .fridge-level { 
-      width: calc(50% - 20px);
-      padding: 0;
-      background: transparent;
-    }
-
-    .fridge-level:nth-child(odd) {
-      margin-right: 10px;
-    }
-
-    .fridge-level:nth-child(even) {
-      margin-left: 10px;
-      margin-right: 0;
-    }
-  }
-
-  .fridge-level__line {
-    display: none;
-  }
-
-  @media screen and (min-width: 992px) {
-    .fridge-level__line {
-      display: block;
-      position: absolute;
-      bottom: 0;
-      background: #000;
-      height: 2px;
-      animation-name: lineWidith;
-      animation-duration: 3s;
-      transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
-      animation-fill-mode: forwards;
-    }
-  }
-
-  @keyframes lineWidith {
-    from {width: 0%;}
-    to {width: 100%;}
   }
 
   .full-fridge-alert {
