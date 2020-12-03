@@ -17,7 +17,7 @@ This app is thought to be absolutely responsive, you can swipe items and fridge 
 
 ### Thanks to 
 http://projects.verou.me/css3patterns/ for lined paper css background
-https://manuelpinto.in for linear gradient animations on stored items
+https://manuelpinto.in for linear gradient animations on stored items.
 
 
 
