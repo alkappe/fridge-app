@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="fridge-container">
-      <FridgeLevel v-for="category in categories" v-bind:key="category.id" v-bind:categories-title="cat"/>
+      <FridgeLevel v-for="category in categories" v-bind:key="category.id" v-bind:categories-title="category"/>
     </div>
     <div class="search">
       <form class="search__form">
