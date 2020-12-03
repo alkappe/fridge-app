@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="fridge-container">
+      <FridgeLevel v-for="category in categories" v-bind:key="category.id" v-bind:categories-title="cat"/>
+    </div>
     <div class="search">
       <form class="search__form">
         <input class="search__input" type="text" v-model="searchItem"  placeholder="Search product 🔍︎ 😋">
@@ -45,12 +48,14 @@
 
 import Items from './components/Items';
 import AddItem from './components/AddItem';
+import FridgeLevel from './components/FridgeLevel';
 
 export default {
   name: 'app',
   components: {
     Items,
-    AddItem
+    AddItem,
+    FridgeLevel
   },
   props: {
 
@@ -58,6 +63,14 @@ export default {
   data() {
     return {
       searchItem: '',
+      categories: [
+        'salumi',
+        'formaggi',
+        'verdure',
+        'bibite',
+        'altro'
+
+      ],
       items: [
         {
           id: 1,
